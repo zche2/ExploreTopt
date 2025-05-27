@@ -7,7 +7,7 @@ library(ggthemes)
 
 #### test mixing effect ####
 #### load data ####
-df <- read.csv("/Users/hzc/data/forAnova.csv",
+df <- read.csv("Anova.csv",
                header = TRUE, 
                colClasses = c("factor", "numeric", "numeric", "numeric","numeric","factor","numeric","numeric"))
 
@@ -39,7 +39,7 @@ lgd <- c('EBF', 'ENF', 'DBF', 'MF', 'SHR', 'SAV', 'GRA', 'CRO', 'WET')
 color <- c("#228B22","#32CD32","#00FF7F","#FFA500","#F0E68C","#FFA07A","#DB7093","#00008B","#A52A2A")
 df$predict_byGroup <- fitted(B4, level = 1)
 df$predict_All <- fitted(B4, level = 0)
-df$vegtype <- factor(df$vegtype,levels = lgd)  # 调整排序的优先级
+df$vegtype <- factor(df$vegtype,levels = lgd)
 figpop1 <- ggplot()+
   geom_point(df, mapping=aes(x=Tgs_mean,y=Topt_mean,
                              group=vegtype,color=vegtype),shape=1)+ 
@@ -61,4 +61,4 @@ figpop1 <- ggplot()+
   coord_fixed()
 
 
-figpop1  #在窗口右下角预览一下图
+figpop1 
