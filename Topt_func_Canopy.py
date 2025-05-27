@@ -5,7 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from const import const
 
-
 class Topt_4_Canopy():
     def __init__(self, df, MAT, params = None):
         # Ca, t2m, Iabs, pb, VPD, iv, TGROWTH, THOME of all timestamp
