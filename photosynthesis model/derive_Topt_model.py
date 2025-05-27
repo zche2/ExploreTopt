@@ -16,7 +16,6 @@ allpath.sort()
 
 # prepare a year list
 all_yr = list(np.arange(1992,2022))
-# 列表拼接的方法：
 final = [["site"]+all_yr]
 
 for ipath in allpath:
