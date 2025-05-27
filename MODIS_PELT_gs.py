@@ -1,6 +1,8 @@
 """
 date: 2023/06/16
-description: 用Fang(2023)的方法计算生长季，写起来要简便一些，因为不再需要划分半球
+description: 
+Extract growing season based on PELT method, adapted from 
+Fang, J., Li, X., Xiao, J., Yan, X., Li, B., & Liu, F. (2023). Vegetation photosynthetic phenology dataset in northern terrestrial ecosystems. Sci Data, 10(1), 300. https://doi.org/10.1038/s41597-023-02224-w 
 """
 
 import numpy as np
@@ -14,9 +16,6 @@ from scipy.signal import savgol_filter    # savgol filter
 from changepy import pelt    # Change Point Detection: PELT
 from changepy.costs import normal_var
 ## see: https://github.com/ruipgil/changepy
-
-
-## 定义求单个点的GS的函数：
 
 def sos_eos(NIRv, dd, SG_filter=True):
     """
@@ -44,7 +43,7 @@ def sos_eos(NIRv, dd, SG_filter=True):
     for i in range(len(me)):
         start = cpts[i]
         end = cpts[i+1]
-        me[i] = np.nanmean(NIRv_SGfilter[start:end])  # 两个change pts之间的算数平均
+        me[i] = np.nanmean(NIRv_SGfilter[start:end])  # mean between to adjacent change points
 
     ## identifying potential bottoms
     # diff1
@@ -82,7 +81,7 @@ def sos_eos(NIRv, dd, SG_filter=True):
             peak_idx[i] = cpts[maxgpp_idx+start]
             peak_val[i] = maxgpp_rg
         else:
-            peak_idx[i] = -1       # 对于不合理的peak, 将其下标置于-1
+            peak_idx[i] = -1       # -1 if it's not a valid peak
             peak_val[i] = np.nan
 
     ## SOS and EOS
@@ -126,7 +125,7 @@ def cal_Tgs(Tdmax, NIRv, dd, SG_filter=True):
     
     
 if __name__ =='__main__':  
-    ## MODIS的记录日期
+    ## MODIS
     year = np.arange(2001,2015.1,1)
     date = ['01-01','01-17','02-02','02-18','03-06','03-22','04-07','04-23','05-09','05-25','06-10','06-26',
            '07-12','07-28','08-13','08-29','09-14','09-30','10-16','11-01','11-17','12-03','12-19']
@@ -144,9 +143,9 @@ if __name__ =='__main__':
 
             
     
-    ipath1 = '/scratch/hezichang/data/MODIS/'
-    ipath2 = '/scratch/hezichang/data/CRUNCEP/'
-    opath = '/scratch/hezichang/data/MODIS/'
+    ipath1 = '/path2/MODIS/'
+    ipath2 = '/path2CRUNCEP/'
+    opath = '/OutputPath/'
 
     ndvi = np.load(ipath1+'NDVI_16d_halfdeg_2001_2015.npy')
     nir = np.load(ipath1+'NIR_16d_halfdeg_2001_2015.npy')
