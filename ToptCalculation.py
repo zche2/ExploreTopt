@@ -1,3 +1,4 @@
+"""Extract Topt, Method 2.2.1"""
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -65,8 +66,8 @@ def find_opt_T(T,VI,flag=0,VALID_YR=[0], YR=0):
         vi_bin = np.zeros(L)*np.nan
         for i in range(L):
             valid = tt==t_array[i]
-            t_bin[i] = np.nanmean(T_tmp[valid])     ### 更新：bin内求平均
-            vi90 = np.nanmax(VI_tmp[valid])     # for 模拟的GPP 100%
+            t_bin[i] = np.nanmean(T_tmp[valid])
+            vi90 = np.nanmax(VI_tmp[valid])  # for modelled GPP
             vi_bin[i] = vi90
         # 12月11日更改
         if L>5:
@@ -84,16 +85,15 @@ def find_opt_T(T,VI,flag=0,VALID_YR=[0], YR=0):
             plt.title("%s %d"%(SITE_NAME,YR), fontsize=20)
             plt.xticks(fontsize= 15)
             plt.yticks(fontsize= 15)
-            ax=plt.gca();#获得坐标轴的句柄
-            ax.spines['bottom'].set_linewidth(1.5);###设置底部坐标轴的粗细
-            ax.spines['left'].set_linewidth(1.5);####设置左边坐标轴的粗细
-            ax.spines['right'].set_linewidth(1.5);###设置右边坐标轴的粗细
-            ax.spines['top'].set_linewidth(1.5);####设置上部坐标轴的粗细
+            ax=plt.gca()
+            ax.spines['bottom'].set_linewidth(1.5)
+            ax.spines['left'].set_linewidth(1.5)
+            ax.spines['right'].set_linewidth(1.5)
+            ax.spines['top'].set_linewidth(1.5)
             plt.show()
-            # fig.savefig('/Users/hzc/data/LP/pic/%s %s.png'%(SITE_NAME,pic_tt))#;plt.close(fig)
+            # fig.savefig('path.png'%(SITE_NAME,pic_tt))#;plt.close(fig)
 
         # if index == len(trg)-1 or index==0:
-        # 12月11日更改
         if index == len(trg)-1:
             return np.nan
         else:
