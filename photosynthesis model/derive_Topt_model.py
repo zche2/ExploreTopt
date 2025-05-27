@@ -1,22 +1,11 @@
-import sys
-sys.path.append('/workdir/hezichang/pycode/pyTools')
-
 import json
 import pandas as pd
 import numpy as np
 import os
 import csv
 from ToptCalculation_202301 import find_opt_T
-"""
-Update: 2025/01/12
-change Topt detection criteria and create json file to automize the calculation.
 
-Date: 2024/12/09
-描述：把服务器上已做过QC、计算好的GPP-model值的各个站点表格汇总计算Topt，输出文件在Topt_model的文件夹中
-update: label ~valid_yr and undetectable Topt as -9999 and np.nan, respectively.
-"""
-
-with open("/workdir/hezichang/pycode/MoreAnalysis_2024/json_deriveTopt.txt","r", encoding='UTF-8') as f:
+with open("Json_file_to_modelling_outputs","r", encoding='UTF-8') as f:
     mydict = json.load(f)
 
 path      = mydict["path"]
