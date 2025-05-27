@@ -1,6 +1,4 @@
-''' Canopy Light Absorption Added'''
-import sys
-sys.path.append('/Users/hzc/data/sofie_202407/pycode/pyTools')
+''' Photosynthesis Model'''
 
 import numpy as np
 import pandas as pd
