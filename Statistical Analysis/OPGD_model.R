@@ -3,7 +3,7 @@ install.packages("GD")
 library("GD")
 
 #### set work path ####
-setwd("C:/Users/27519/Desktop/")
+setwd("")
 
 #### try NDVI ####
 df <- read.csv("MODIS_Topt.csv")
